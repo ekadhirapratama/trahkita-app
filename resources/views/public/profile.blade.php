@@ -129,9 +129,9 @@
 
     <!-- Primary Action: High-Contrast & Accessible -->
     <div class="mt-4 mb-8 w-full flex justify-center">
-        <button class="w-full max-w-sm bg-primary text-on-primary font-headline font-bold py-4 px-6 rounded-2xl flex items-center justify-center shadow-lg active:scale-95 transition-transform hover:bg-primary-container">
+        <a href="{{ route('member.suggest', $member->id) }}" class="w-full max-w-sm bg-primary text-on-primary font-headline font-bold py-4 px-6 rounded-2xl flex items-center justify-center shadow-lg active:scale-95 transition-transform hover:bg-primary-container">
             <span class="material-symbols-outlined mr-3" data-icon="edit">edit</span>
             Ajukan Perubahan
-        </button>
+        </a>
     </div>
 </x-public-layout>

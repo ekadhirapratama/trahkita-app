@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\PublicController::class, 'index'])->name('home');
 Route::get('/member/{id}', [\App\Http\Controllers\PublicController::class, 'profile'])->name('member.profile');
+Route::get('/member/{id}/suggest', [\App\Http\Controllers\SubmissionController::class, 'suggest'])->name('member.suggest');
+Route::post('/member/{id}/suggest', [\App\Http\Controllers\SubmissionController::class, 'storeSuggestion'])->name('member.suggest.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
