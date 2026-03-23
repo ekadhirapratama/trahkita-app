@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.submissions.index')" :active="request()->routeIs('admin.submissions.*')">
                         {{ __('Pengajuan') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                        {{ __('Kelola Admin') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -77,6 +80,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.submissions.index')" :active="request()->routeIs('admin.submissions.*')">
                 {{ __('Pengajuan') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                {{ __('Kelola Admin') }}
             </x-responsive-nav-link>
         </div>
 

@@ -20,10 +20,14 @@ Route::post('/member/{id}/suggest', [\App\Http\Controllers\SubmissionController:
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $totalMembers = \App\Models\Member::count();
+        $pendingSubmissions = \App\Models\Submission::where('status', 'pending')->count();
+        $latestActivities = \App\Models\ActivityLog::with('user')->latest()->take(5)->get();
+        return view('dashboard', compact('totalMembers', 'pendingSubmissions', 'latestActivities'));
     })->name('dashboard');
     
     Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->only(['index', 'store', 'destroy']);
     
     Route::resource('submissions', \App\Http\Controllers\Admin\SubmissionController::class)->only(['index', 'show', 'destroy']);
     Route::patch('submissions/{submission}/status', [\App\Http\Controllers\Admin\SubmissionController::class, 'updateStatus'])->name('submissions.update_status');
