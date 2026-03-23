@@ -24,6 +24,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     })->name('dashboard');
     
     Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
+    
+    Route::resource('submissions', \App\Http\Controllers\Admin\SubmissionController::class)->only(['index', 'show', 'destroy']);
+    Route::patch('submissions/{submission}/status', [\App\Http\Controllers\Admin\SubmissionController::class, 'updateStatus'])->name('submissions.update_status');
 });
 
 require __DIR__.'/auth.php';
