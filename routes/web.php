@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\PublicController::class, 'index'])->name('home');
+Route::get('/member/{id}', [\App\Http\Controllers\PublicController::class, 'profile'])->name('member.profile');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
