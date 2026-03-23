@@ -18,8 +18,12 @@ Route::get('/member/{id}', [\App\Http\Controllers\PublicController::class, 'prof
 Route::get('/member/{id}/suggest', [\App\Http\Controllers\SubmissionController::class, 'suggest'])->name('member.suggest');
 Route::post('/member/{id}/suggest', [\App\Http\Controllers\SubmissionController::class, 'storeSuggestion'])->name('member.suggest.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard');
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
+});
 
 require __DIR__.'/auth.php';
