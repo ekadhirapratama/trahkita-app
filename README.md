@@ -79,3 +79,38 @@ Aplikasi ini menjunjung tinggi standar privasi. Keamanan yang telah diterapkan o
 2. Proses persetujuan (approval) perubahan dua tahap terhadap modifikasi basis data oleh pengguna publik.
 3. Perlindungan rute Admin dengan Middleware `AdminOnly`.
 4. Mencegah File-Upload vulnerability lewat limit ekstensi file (`image/*`).
+
+## Git Flow & Deployment
+
+Ringkasan singkat tentang alur kode dan langkah deploy tanpa menyertakan credential atau path server.
+
+1. Branching model
+   - `main` — development harian (tempat semua fitur dan perbaikan dikembangkan dan dites).
+   - `deploy` — branch produksi yang dipantau oleh hosting untuk auto-deploy.
+
+2. Aturan kerja
+   - Kerjakan fitur di `main` (atau branch feature lokal), lakukan review dan testing.
+   - Setelah siap, merge perubahan ke `deploy` untuk merilis ke production.
+
+3. Langkah singkat deploy
+   - Pastikan `main` up-to-date dan semua pengujian dasar lulus.
+   - Build aset secara lokal: `npm install` lalu `npm run prod`.
+   - Commit hasil build bila diperlukan lalu push ke `main`.
+   - Merge `main` ke `deploy` dan push `deploy` ke remote: ini akan memicu auto-deploy di hosting.
+
+4. Perintah git contoh (lokal)
+```
+git checkout main
+git pull origin main
+# build assets
+npm run prod
+git add -A
+git commit -m "chore: build assets for release"
+git push origin main
+
+# release
+git checkout deploy
+git merge main
+git push origin deploy
+git checkout main
+```
